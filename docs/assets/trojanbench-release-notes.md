@@ -10,6 +10,17 @@ repository's original utility.
 > instance was excluded from this release because its poisoned scene could not be
 > recovered from archival storage; all counts below refer to the 383 released instances.
 
+## Request access
+
+TrojanBench is a **gated dataset**. To download, first submit the access-request form:
+
+👉 https://docs.google.com/forms/d/e/1FAIpQLSdTSTVg4b0swpAjHgq5JGNUEkZkUunxBpqI7KWD_VueM14IXg/viewform
+
+The form collects your name, affiliation, contact email, Hugging Face username, and
+intended use. After review we approve your Hugging Face account, and you can download
+the dataset with your HF token (see "Download shards" below). Read the "Safety and
+ethics" section before use.
+
 ## Safety and ethics
 
 - **All secrets are synthetic.** Planted credentials use documentation-example keys and
