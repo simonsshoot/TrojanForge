@@ -12,9 +12,8 @@ repository's original utility.
 
 ## Request access
 
-TrojanBench is a **gated dataset**. To download, first submit the access-request form:
-
-👉 https://docs.google.com/forms/d/e/1FAIpQLSdTSTVg4b0swpAjHgq5JGNUEkZkUunxBpqI7KWD_VueM14IXg/viewform
+TrojanBench is a **gated dataset**. To download, first submit the
+[access-request form](https://docs.google.com/forms/d/e/1FAIpQLSdTSTVg4b0swpAjHgq5JGNUEkZkUunxBpqI7KWD_VueM14IXg/viewform).
 
 The form collects your name, affiliation, contact email, Hugging Face username, and
 intended use. After review we approve your Hugging Face account, and you can download
