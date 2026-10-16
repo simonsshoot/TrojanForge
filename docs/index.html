@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10221f">
+  <meta name="description" content="TrojanForge: automated repository poisoning against coding agents. A research project page for the paper and TrojanBench benchmark.">
+  <meta property="og:title" content="TrojanForge — Repository-level poisoning">
+  <meta property="og:description" content="Can coding agents tell friend from foe? TrojanForge studies how repository structure, execution paths, and trust blind spots shape agent robustness.">
+  <meta property="og:image" content="assets/repository-poisoning.png">
+  <title>Trojan Horse: Automated Repository Poisoning against Coding Agents | TrojanForge</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#top">Skip to main content</a>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="wordmark" href="#top" aria-label="TrojanForge home">
+        <span class="wordmark-mark" aria-hidden="true">TF</span>
+        <span>TrojanForge</span>
+      </a>
+      <nav class="topnav" aria-label="Primary navigation">
+        <a href="#story">Why it matters</a>
+        <a href="#method">How it works</a>
+        <a href="#results">Results</a>
+        <a href="#resources">Resources</a>
+      </nav>
+      <a class="topbar-link" href="https://github.com/simonsshoot/TrojanForge" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main id="top">
+      <section class="hero section-pad">
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><span class="eyebrow-dot"></span>Research project · defensive evaluation</p>
+          <h1>Can coding agents tell <em>friend</em> from foe?</h1>
+          <p class="hero-deck"><strong>Trojan Horse: Automated Repository Poisoning against Coding Agents.</strong> TrojanForge studies how an otherwise benign development task can become an execution path for hidden, attacker-controlled behavior.</p>
+          <div class="hero-actions">
+            <a class="button button-dark" href="trojanforge-paper.pdf" target="_blank">Read the paper <span aria-hidden="true">↗</span></a>
+            <a class="button button-light" href="https://github.com/simonsshoot/TrojanForge" target="_blank" rel="noreferrer">Explore the code <span aria-hidden="true">↗</span></a>
+          </div>
+          <dl class="hero-facts" aria-label="Project facts">
+            <div><dt>384</dt><dd>paper benchmark instances</dd></div>
+            <div><dt>4</dt><dd>payload carrier types</dd></div>
+            <div><dt>12</dt><dd>evaluated models</dd></div>
+          </dl>
+        </div>
+        <div class="hero-art reveal reveal-delay-1">
+          <div class="hero-art-label">repository / execution path</div>
+          <img src="assets/repository-poisoning.png" width="1507" height="1039" fetchpriority="high" alt="Illustration of a coding agent following a repository execution path toward a concealed Trojan horse.">
+          <div class="hero-art-note"><span>01</span> The repository looks ordinary.<br><span>02</span> The task makes the path reachable.<br><span>03</span> The payload hides in plain sight.</div>
+        </div>
+      </section>
+
+      <section class="video-section section-pad" aria-labelledby="video-title">
+        <div class="section-kicker">01 / See the idea</div>
+        <div class="video-heading">
+          <div><h2 id="video-title">A repository can be<br><em>the attack surface.</em></h2></div>
+          <p class="section-intro">A short visual introduction to the <em>threat model</em>, the <em>framework</em>, and the <em>benchmark</em>.</p>
+        </div>
+        <figure class="video-frame reveal">
+          <video controls playsinline preload="metadata" poster="assets/repository-poisoning.png" aria-label="TrojanForge introduction" aria-describedby="video-overview">
+            <source src="assets/TrojanForge_Intro.mp4" type="video/mp4">
+            Your browser does not support embedded video. <a href="assets/TrojanForge_Intro.mp4">Download the introduction video.</a>
+          </video>
+          <figcaption><span>TrojanForge / Introduction</span><span>01:05 · MP4</span></figcaption>
+        </figure>
+        <details class="video-overview" id="video-overview">
+          <summary>Read the introduction overview</summary>
+          <p>Coding agents read repositories, edit code, and run tests or builds to complete legitimate tasks. Repository-level poisoning places attacker-controlled behavior along those execution paths, disguised as ordinary development code.</p>
+          <p>TrojanForge studies this threat in three stages: analyze repository structure and an agent’s execution trace to identify reachable locations; use a security review agent’s suspicion ranking to find trust blind spots; then refine disguise strategies using feedback from the target agent.</p>
+          <p>TrojanBench brings these cases together for defensive evaluation. The paper benchmark spans 384 instances, six task domains, nine languages, and four carrier types: exfiltration, destruction, tampering, and backdoor injection. Evaluation across four harnesses and twelve models measures observable effects using deterministic checks. All evaluation secrets are synthetic, and capture endpoints are local.</p>
+        </details>
+      </section>
+
+      <section class="story-section section-pad" id="story" aria-labelledby="story-title">
+        <div class="section-kicker">02 / The problem</div>
+        <div class="story-grid">
+          <div class="story-heading"><h2 id="story-title">The danger is not a suspicious file. It is a <em>plausible workflow.</em></h2></div>
+          <div class="story-body">
+            <p>Modern coding agents navigate repositories, edit files, run tests, and execute build commands on a user’s behalf. Their usefulness depends on trusting the development context around them.</p>
+            <p>TrojanForge asks what happens when that context is carefully prepared to look normal. A poisoned repository does not need to announce its intent. It only needs to place a payload where the legitimate task will reach it, and make that payload feel unremarkable when the agent looks around.</p>
+            <div class="callout"><span class="callout-mark">!</span><p><strong>Repository-level poisoning</strong> is the combination of a reachable execution path and a disguise that survives the agent’s own safety checks.</p></div>
+          </div>
+        </div>
+        <div class="fig-pair reveal">
+          <figure class="wide-figure">
+            <button class="figure-button" type="button" aria-controls="figure-dialog" aria-expanded="false" data-lightbox="assets/intro-figure.png" data-caption="Repository-level poisoning: malicious logic hides in the execution path while evading agent security checks.">
+              <img src="assets/intro-figure.png" width="1085" height="748" alt="Conceptual illustration of repository-level poisoning and agent execution focus." loading="lazy">
+              <span class="zoom-hint">Click to enlarge <span aria-hidden="true">↗</span></span>
+            </button>
+            <figcaption>Repository-level poisoning: the agent follows an ordinary task while the malicious logic remains outside its inspection focus.</figcaption>
+          </figure>
+          <figure class="wide-figure">
+            <button class="figure-button" type="button" aria-controls="figure-dialog" aria-expanded="false" data-lightbox="assets/trojanbench-figure.png" data-caption="TrojanBench: a benchmark of poisoned repositories automatically generated by TrojanForge.">
+              <img src="assets/trojanbench-figure.png" width="1056" height="1056" alt="TrojanBench: a benchmark of poisoned repositories automatically generated by TrojanForge." loading="lazy">
+              <span class="zoom-hint">Click to enlarge <span aria-hidden="true">↗</span></span>
+            </button>
+            <figcaption>Figure 4: TrojanBench — a benchmark of poisoned repositories automatically generated by TrojanForge.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="method-section section-pad" id="method" aria-labelledby="method-title">
+        <div class="section-kicker">03 / The framework</div>
+        <div class="method-heading">
+          <h2 id="method-title">Three stages.<br><em>One adaptive pipeline.</em></h2>
+          <p class="section-intro">TrojanForge adapts both <em>where</em> a payload is mounted and <em>how</em> it is disguised to the repository, task, and target agent.</p>
+        </div>
+        <div class="stage-list">
+          <article class="stage-card reveal">
+            <div class="stage-number">01</div>
+            <div><h3>Reachability analysis</h3><p>Index the benign repository with a multi-language AST, observe a probe trajectory, and map the agent’s commands onto code entities it is likely to reach.</p><span class="stage-tag">AST + trajectory</span></div>
+          </article>
+          <article class="stage-card reveal reveal-delay-1">
+            <div class="stage-number">02</div>
+            <div><h3>Trust blind-spot discovery</h3><p>Ask a security review agent to rank reachable candidates by suspicion, then reverse that ranking to identify locations that attract the least scrutiny.</p><span class="stage-tag">suspicion reversal</span></div>
+          </article>
+          <article class="stage-card reveal reveal-delay-2">
+            <div class="stage-number">03</div>
+            <div><h3>Disguise strategy iteration</h3><p>Generate, materialize, and test diverse strategies. When the target agent detects a payload, turn its observable reasoning into constraints for the next generation.</p><span class="stage-tag">feedback → refinement</span></div>
+          </article>
+        </div>
+        <figure class="wide-figure framework-figure reveal">
+          <button class="figure-button" type="button" aria-controls="figure-dialog" aria-expanded="false" data-lightbox="assets/framework-figure.png" data-caption="TrojanForge framework: reachability analysis, trust blind-spot discovery, and disguise strategy iteration.">
+            <img src="assets/framework-figure.png" width="2398" height="918" alt="TrojanForge framework diagram showing reachability analysis, trust blind-spot discovery, and disguise strategy iteration." loading="lazy">
+            <span class="zoom-hint">Click to enlarge <span aria-hidden="true">↗</span></span>
+          </button>
+          <figcaption>The pipeline uses the target agent’s own execution and detection behavior as feedback for adaptive generation.</figcaption>
+        </figure>
+      </section>
+
+      <section class="results-section section-pad" id="results" aria-labelledby="results-title">
+        <div class="section-kicker">04 / What we found</div>
+        <div class="results-topline">
+          <div><h2 id="results-title">The hardest payload<br><em>is the quietest one.</em></h2></div>
+          <div class="results-summary"><p>Across the main evaluation, TrojanForge reaches its highest success rates on payloads that can be made to look like ordinary repository behavior.</p><p class="muted">Lower success rates are stronger defenses.</p></div>
+        </div>
+        <p class="metric-context">Peak attack success rate across the main cross-harness evaluation.</p>
+        <div class="metric-strip" aria-label="Peak attack success rates across the main cross-harness evaluation">
+          <div><span>Exfiltration</span><strong>76<span class="metric-unit">%</span></strong><small>peak ASR</small></div>
+          <div><span>Destruction</span><strong>85<span class="metric-unit">%</span></strong><small>peak ASR</small></div>
+          <div><span>Tampering</span><strong>94<span class="metric-unit">%</span></strong><small>peak ASR</small></div>
+          <div class="metric-featured"><span>Backdoor</span><strong>100<span class="metric-unit">%</span></strong><small>peak ASR</small></div>
+        </div>
+        <figure class="results-figure reveal">
+          <button class="figure-button" type="button" aria-controls="figure-dialog" aria-expanded="false" data-lightbox="assets/result.png" data-caption="DeepSeek-V4-Flash baseline comparison across four payload carriers. TrojanForge ASR: exfiltration 76.5%, destruction 44.1%, tampering 85.3%, backdoor 94.1%.">
+            <img src="assets/result.png" width="2329" height="582" alt="DeepSeek-V4-Flash baseline comparison. TrojanForge attack success rates are 76.5% for exfiltration, 44.1% for destruction, 85.3% for tampering, and 94.1% for backdoor." loading="lazy">
+            <span class="zoom-hint">Click to enlarge <span aria-hidden="true">↗</span></span>
+          </button>
+          <figcaption>On the DeepSeek-V4-Flash harness, TrojanForge outperforms BlindShot, RandMount, OnePass, and ZeroForge across all four carrier types.</figcaption>
+        </figure>
+        <div class="results-cards">
+          <article><span class="card-index">A</span><h3>Backdoor injection</h3><p>The most damaging carrier in the main evaluation, with success rates above 90% across harnesses.</p></article>
+          <article><span class="card-index">B</span><h3>Cross-agent transfer</h3><p>Poisoning strategies can transfer across harnesses and models, exposing a weakness that is not isolated to one agent.</p></article>
+          <article><span class="card-index">C</span><h3>Deterministic verdicts</h3><p>TrojanBench evaluates observable carrier effects with manifests and sentinels rather than an LLM judge.</p></article>
+        </div>
+      </section>
+
+      <section class="benchmark-section section-pad" aria-labelledby="benchmark-title">
+        <div class="benchmark-copy"><div class="section-kicker">05 / TrojanBench</div><h2 id="benchmark-title">A benchmark for<br><em>agent robustness.</em></h2><p>TrojanBench collects poisoned repositories generated by TrojanForge into a reproducible evaluation suite spanning everyday development tasks, domains, languages, and four carrier types.</p><a class="text-link" href="https://huggingface.co/datasets/MikeYoung123/TrojanBench" target="_blank" rel="noreferrer">Request dataset access <span aria-hidden="true">↗</span></a></div>
+        <div class="benchmark-stats">
+          <div class="bench-stat"><strong>383</strong><span>released instances</span><small>384 in the paper; one unrecoverable C1 scene omitted from release</small></div>
+          <div class="bench-stat"><strong>6</strong><span>task domains</span><small>issue-fix · app-dev · env-setup · data-proc · perf-opt · it-ops</small></div>
+          <div class="bench-stat"><strong>9</strong><span>programming languages</span><small>Python, Go, TypeScript, JavaScript, Java, Rust, Shell, C++, C</small></div>
+          <div class="bench-stat"><strong>4</strong><span>carrier types</span><small>exfiltration · destruction · tampering · backdoor</small></div>
+        </div>
+      </section>
+
+      <section class="resources-section section-pad" id="resources" aria-labelledby="resources-title">
+        <div class="section-kicker">06 / Responsible release</div>
+        <div class="resources-grid">
+          <div><h2 id="resources-title">Built for defenders.<br><em>Released with care.</em></h2><p>The public repository exposes verification utilities, benign seed preparation, and measurement primitives. The end-to-end generation pipeline and executable poisoned instances remain withheld or gated pending coordinated disclosure.</p></div>
+          <div class="resource-links">
+            <a class="resource-link" href="trojanforge-paper.pdf" target="_blank"><span><b>Paper</b><small>Download the full PDF</small></span><span aria-hidden="true">↗</span></a>
+            <a class="resource-link" href="https://github.com/simonsshoot/TrojanForge" target="_blank" rel="noreferrer"><span><b>GitHub repository</b><small>Verification code and documentation</small></span><span aria-hidden="true">↗</span></a>
+            <a class="resource-link" href="https://huggingface.co/datasets/MikeYoung123/TrojanBench" target="_blank" rel="noreferrer"><span><b>TrojanBench on Hugging Face</b><small>Gated benchmark release</small></span><span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <div class="ethics-note"><span class="ethics-symbol">◎</span><p><strong>Safety note.</strong> All credentials and secrets used in the evaluation are synthetic. Exfiltration endpoints are local capture sinks. Use the released material only for authorized defensive research in isolated environments.</p></div>
+      </section>
+    </main>
+
+    <footer class="footer section-pad">
+      <div class="footer-brand"><span class="wordmark-mark" aria-hidden="true">TF</span><span>TrojanForge</span></div>
+      <p>Automated repository poisoning against coding agents.</p>
+      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </footer>
+  </div>
+
+  <div class="lightbox" id="figure-dialog" role="dialog" aria-modal="true" aria-label="Expanded figure" aria-describedby="figure-caption" hidden>
+    <button class="lightbox-close" type="button" aria-label="Close expanded figure">×</button>
+    <figure><img src="" alt=""><figcaption id="figure-caption"></figcaption></figure>
+  </div>
+  <script src="site.js"></script>
+</body>
+</html>
